@@ -1,58 +1,92 @@
+<!-- Joystick code: https://github.com/bobboteck/JoyStick -->
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title> Portfolio Website </title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+    <script src="joy.js"></script>
 </head>
-
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+    <div id="video"></div>
+    <div id="faceWrapper">
+        <span class="ear inverse">ጋ</span>
+        <div id="face">
+            <div id="controls" class="flex">
+                <div id="joy1Div" style="width:200px;height:200px;margin:10px" class="joystick"></div>
+                <div id="tapButtons" class="flex">
+                    <button id="j" out="4" class="tap">J</button>
+                    <button id="k" out="5" class="tap">K</button>
+                </div>
+                <div id="joy2Div" style="width:200px;height:200px;margin:10px" class="joystick"></div>
+            </div>
+            <span id="noseMouth">ʖ<br>‿</span>
         </div>
-    </nav>
-</body>
+        <span class="ear">ጋ</span>
+    </div>
 
+    <p id="output"></p>
+    
+    Posizione X:<input id="joy1PosizioneX" type="text" /><br />
+    Posizione Y:<input id="joy1PosizioneY" type="text" /><br />
+    Direzione:<input id="joy1Direzione" type="text" /><br />
+    X :<input id="joy1X" type="text" /></br>
+    Y :<input id="joy1Y" type="text" />
+
+    Posizione X:<input id="joy2PosizioneX" type="text" /><br />
+    Posizione Y:<input id="joy2PosizioneY" type="text" /><br />
+    Direzione:<input id="joy2Direzione" type="text" /><br />
+    X :<input id="joy2X" type="text" /></br>
+    Y :<input id="joy2Y" type="text" />
+
+
+    
+    <script type="text/javascript">
+        var joy1IinputPosX = document.getElementById("joy1PosizioneX");
+        var joy1InputPosY = document.getElementById("joy1PosizioneY");
+        var joy1Direzione = document.getElementById("joy1Direzione");
+        var joy1X = document.getElementById("joy1X");
+        var joy1Y = document.getElementById("joy1Y");
+        
+        // Create JoyStick object into the DIV 'joy1Div'
+        var Joy1 = new JoyStick('joy1Div', {
+            internalFillColor: '#AA0000',
+            internalStrokeColor: '#330000',
+            externalStrokeColor: '#800000',
+        }, function(stickData) {
+            joy1IinputPosX.value = stickData.xPosition;
+            joy1InputPosY.value = stickData.yPosition;
+            joy1Direzione.value = stickData.cardinalDirection;
+            joy1X.value = stickData.x;
+            joy1Y.value = stickData.y;
+
+            joystickOut(stickData.x, 0);
+            joystickOut(stickData.y / 0.95, 1);
+        });
+        
+        var joy2IinputPosX = document.getElementById("joy2PosizioneX");
+        var joy2InputPosY = document.getElementById("joy2PosizioneY");
+        var joy2Direzione = document.getElementById("joy2Direzione");
+        var joy2X = document.getElementById("joy2X");
+        var joy2Y = document.getElementById("joy2Y");
+        
+        // Create JoyStick object into the DIV 'joy1Div'
+        var Joy1 = new JoyStick('joy2Div', {
+            internalFillColor: '#0000AA',
+            internalStrokeColor: '#000033',
+            externalStrokeColor: '#000080',
+        }, function(stickData) {
+            joy2IinputPosX.value = stickData.xPosition;
+            joy2InputPosY.value = stickData.yPosition;
+            joy2Direzione.value = stickData.cardinalDirection;
+            joy2X.value = stickData.x;
+            joy2Y.value = stickData.y;
+            
+            joystickOut(stickData.x, 2);
+            joystickOut(stickData.y / 0.95, 3);
+        });
+    </script>
+    <script src="script.js"></script>
 </html>

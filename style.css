@@ -1,0 +1,101 @@
+* {
+    font-family: sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
+#video {
+    display: block;
+    width: 680px;
+    height: 480px;
+    background-color: red;
+}
+
+#faceWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#face {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-width: 0 0 1px;
+    border-style: solid;
+    border-radius: 100%;
+    padding: 1000px 100px 0;
+    margin: -1000px -110px 0;
+}
+
+:root {
+    --keySize: 100px;
+}
+
+.joystick {
+    border-top: 5px solid black;
+    border-radius: 40%;
+}
+
+#output {
+    display: block;
+    width: 500px;
+    height: 500px;
+    color: black;
+    font-weight: bold;
+    overflow-y: auto;
+    background-color: lime;
+}
+
+#controls {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex {
+    display: flex;
+}
+
+button.tap {
+    background-color: yellow;
+    width: var(--keySize);
+    height: var(--keySize);
+    font-weight: bold;
+    margin: 2px;
+}
+
+button[on]{
+    background-color: red;
+}
+
+.wasdLayout > * {
+    display: flex;
+    justify-content: center;
+}
+
+#noseMouth {
+    text-align: center;
+    font-size: 200px;
+    margin-top: -50px;
+    padding-bottom: 80px;
+    margin-bottom: 20px;
+    line-height: 50%;
+    z-index: -1;
+    margin-top: 20px;
+}
+
+.ear {
+    font-size: 80px;
+}
+
+.inverse {
+    transform: scaleX(-1);
+}
