@@ -9,6 +9,12 @@
     user-select: none; /* Standard */
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 #video {
     display: block;
     width: 680px;
